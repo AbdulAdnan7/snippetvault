@@ -1,137 +1,118 @@
-import { Shield,  } from "lucide-react";
+"use client";
+
+import { FC, useState } from "react";
+import {
+  FiMail,
+  FiLock,
+  FiEye,
+  FiEyeOff,
+  FiLogIn,
+} from "react-icons/fi";
 import Image from "next/image";
-import Meter from '@/public/Icon.svg'
-import Lock from '@/public/Lock.png'
-import Contact from '@/public/Team.svg'
-import Cloud from '@/public/Cloud.svg'
-import { features } from "process";
+import Github from "@/public/SVG.svg";
 
-const Feature = [
-  {
-    id: 1,
-    src: Meter,
-    desc: 'Ultra Fast'
-  },
-  {
-    id:2,
-    src: Lock,
-    desc: 'End-to-End'
-  },
-  {
-    id:3,
-    src: Contact,
-    desc: 'Team Ready'
-  },
-  {
-    id:4,
-    src: Cloud,
-    desc: 'Cloud Sync'
-  }
-]
+const LoginPage: FC = () => {
+  const [remember, setRemember] = useState<boolean>(false);
+  const [showPassword, setShowPassword] = useState<boolean>(false);
 
-export default function Home() {
   return (
-    <section className="relative min-h-screen bg-slate-900 overflow-hidden pt-24">
+    <section className="relative min-h-screen bg-slate-900 overflow-hidden flex items-center justify-center px-6">
+
       {/* Background Glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[900px] bg-indigo-500/20 blur-[180px] rounded-full"></div>
 
-     
+      {/* Login Form */}
+      <div className="relative w-full max-w-md bg-[#1A1D21]/90 backdrop-blur-xl border border-[#2C2F36] rounded-3xl p-8 shadow-xl">
 
-      {/* Hero Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 mt-16 grid lg:grid-cols-2 gap-16 items-center">
-        {/* LEFT SIDE */}
-        <div className="flex flex-col items-start gap-8 w-full max-w-[672px]">
-          <span className="text-xs bg-indigo-500/10 text-indigo-400 px-3 py-1 rounded-full">
-            NOW IN BETA
-          </span>
-
-          <h1 className="text-5xl lg:text-6xl font-bold text-white leading-tight">
-            Your Secure <br />
-            <span className="text-indigo-400">Code</span>
-            <br />
-            <span className="text-indigo-500">Companion</span>
-          </h1>
-
-          <p className="text-slate-400 text-lg max-w-xl">
-            Save, organize, and share your code snippets effortlessly with our
-            lightning-fast vault built for modern developer workflows.
+        {/* Header */}
+        <div className="mb-6">
+          <h2 className="text-white text-2xl font-semibold mb-1">
+            Welcome back
+          </h2>
+          <p className="text-slate-400 text-sm">
+            Enter your credentials to access your library.
           </p>
+        </div>
 
-          <div className="flex gap-4">
-            <button className="bg-indigo-500 hover:bg-indigo-600 px-6 py-3 rounded-lg text-white font-medium">
-              Get Started Free →
-            </button>
+        {/* Email */}
+        <div className="mb-4">
+          <label className="text-slate-300 text-sm mb-2 block">
+            Email Address
+          </label>
 
-            <button className="border border-slate-600 px-6 py-3 rounded-lg text-slate-200 hover:border-slate-500">
-              View Demo
-            </button>
-          </div>
+          <div className="relative">
+            <FiMail className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500" />
 
-          <div className="flex items-center gap-3 text-slate-400 text-sm">
-            <div className="flex -space-x-2">
-              <div className="w-8 h-8 bg-slate-700 rounded-full flex justify-center items-center font-bold">JD</div>
-              <div className="w-8 h-8 rounded-full flex justify-center items-center font-bold" style={{ backgroundColor: "rgba(60, 131, 246, 1)" }}>AS</div>
-              <div className="w-8 h-8 bg-slate-700 rounded-full flex justify-center items-center">MK</div>
-            </div>
-            Trusted by 10,000+ developers
+            <input
+              type="email"
+              placeholder="name@example.com"
+              className="w-full bg-[#25292F] border border-[#33373E] rounded-xl pl-10 pr-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/40"
+            />
           </div>
         </div>
 
-        {/* RIGHT SIDE */}
-        <div className="relative flex items-center justify-center">
-          {/* background glow */}
-          <div className="absolute  w-[420px] h-[420px] bg-indigo-500/20 blur-[120px] rounded-full"></div>
+        {/* Password */}
+        <div className="mb-4">
+          <div className="flex justify-between mb-2">
+            <label className="text-slate-300 text-sm">Password</label>
+            <button className="text-indigo-400 text-sm hover:underline">
+              Forgot password?
+            </button>
+          </div>
 
-          {/* main code window */}
+          <div className="relative">
+            <FiLock className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500" />
 
-          <Image
-            src={"/Code.png"}
-            className="hidden lg:flex"
-            alt="Code"
-            width={500}
-            height={100}
-          />
-          <div className="absolute hidden lg:flex left-0 bottom-4 border border-white/10 rounded-md bg-white/5 p-2  gap-4 items-center justify-start m-4">
-            {/* Shield Icon */}
-            <div
-              className="border rounded-full w-8 h-8 p-2 flex justify-center items-center"
-              style={{
-                backgroundColor: "rgba(60, 131, 246, 0.1)",
-                color: "rgba(60, 131, 246, 1)",
-                borderColor: "rgba(60, 131, 246, 0.8)",
-              }}
+            <input
+              type={showPassword ? "text" : "password"}
+              placeholder="********"
+              className="w-full bg-[#25292F] border border-[#33373E] rounded-xl pl-10 pr-10 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/40"
+            />
+
+            <button
+              onClick={() => setShowPassword(!showPassword)}
+              type="button"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-white"
             >
-              <Shield />
-            </div>
-
-            {/* Text Content */}
-            <div className="text-[10px] text-slate-400 flex flex-col">
-              <span>Encrypted</span>
-              <span>AES-256 Protocol</span>
-            </div>
+              {showPassword ? <FiEyeOff /> : <FiEye />}
+            </button>
           </div>
         </div>
-      </div>
 
-      {/* Feature Row */}
-     <div className="relative z-10 max-w-7xl mx-auto px-6 mt-20 pb-16 border-t border-slate-800 pt-10
-                flex flex-wrap justify-between items-center gap-4 text-slate-400 text-xs md:text-sm">
-  {Feature.map((feature) => (
-    <div
-      key={feature.id}
-      className="flex items-center gap-2 flex-shrink-0"
-    >
-      <Image
-        src={feature.src}
-        alt={feature.desc}
-        width={16}   // smaller icon
-        height={16}
-        className="object-contain"
-      />
-      <span className="whitespace-nowrap">{feature.desc}</span>
-    </div>
-  ))}
-</div>
+        {/* Remember */}
+        <div className="flex items-center gap-2 mb-6">
+          <input
+            type="checkbox"
+            checked={remember}
+            onChange={() => setRemember(!remember)}
+            className="w-4 h-4 accent-indigo-500"
+          />
+          <span className="text-slate-300 text-sm">
+            Remember me for 30 days
+          </span>
+        </div>
+
+        {/* Sign In */}
+        <button className="w-full bg-indigo-500 hover:bg-indigo-600 transition text-white py-3 rounded-xl flex items-center justify-center gap-2 mb-4">
+          <FiLogIn />
+          Sign In
+        </button>
+
+        {/* Divider */}
+        <div className="flex items-center gap-3 mb-4">
+          <div className="flex-1 h-px bg-slate-700"></div>
+          <span className="text-slate-400 text-sm">OR Continue with</span>
+          <div className="flex-1 h-px bg-slate-700"></div>
+        </div>
+
+        {/* GitHub */}
+        <button className="w-full bg-[#25292F] border border-[#33373E] hover:bg-[#2F353E] text-white py-3 rounded-xl flex items-center justify-center gap-3">
+          <Image src={Github} alt="github" className="w-5 h-5" />
+          GitHub
+        </button>
+      </div>
     </section>
   );
-}
+};
+
+export default LoginPage;

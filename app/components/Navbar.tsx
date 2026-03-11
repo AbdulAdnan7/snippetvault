@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const Navbar = () => {
@@ -16,10 +17,17 @@ const Navbar = () => {
 
       {/* Buttons */}
       <div className="flex gap-4 items-center">
+        <Link href={'/login'}>
+        
         <button className="text-white/80 hover:text-white transition-colors duration-200">Log in</button>
+        </Link>
+
+        <Link href={'/register'}>
         <button className="bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded-lg">
           Get Started
         </button>
+        </Link>
+
       </div>
     </header>
   );
