@@ -1,5 +1,33 @@
-import { Shield } from "lucide-react";
+import { Shield,  } from "lucide-react";
 import Image from "next/image";
+import Meter from '@/public/Icon.svg'
+import Lock from '@/public/Lock.png'
+import Contact from '@/public/Team.svg'
+import Cloud from '@/public/Cloud.svg'
+import { features } from "process";
+
+const Feature = [
+  {
+    id: 1,
+    src: Meter,
+    desc: 'Ultra Fast'
+  },
+  {
+    id:2,
+    src: Lock,
+    desc: 'End-to-End'
+  },
+  {
+    id:3,
+    src: Contact,
+    desc: 'Team Ready'
+  },
+  {
+    id:4,
+    src: Cloud,
+    desc: 'Cloud Sync'
+  }
+]
 
 export default function Home() {
   return (
@@ -41,9 +69,9 @@ export default function Home() {
 
           <div className="flex items-center gap-3 text-slate-400 text-sm">
             <div className="flex -space-x-2">
-              <div className="w-8 h-8 bg-slate-700 rounded-full"></div>
-              <div className="w-8 h-8 bg-slate-700 rounded-full"></div>
-              <div className="w-8 h-8 bg-slate-700 rounded-full"></div>
+              <div className="w-8 h-8 bg-slate-700 rounded-full flex justify-center items-center font-bold">JD</div>
+              <div className="w-8 h-8 rounded-full flex justify-center items-center font-bold" style={{ backgroundColor: "rgba(60, 131, 246, 1)" }}>AS</div>
+              <div className="w-8 h-8 bg-slate-700 rounded-full flex justify-center items-center">MK</div>
             </div>
             Trusted by 10,000+ developers
           </div>
@@ -63,7 +91,7 @@ export default function Home() {
             width={500}
             height={100}
           />
-          <div className="absolute left-0 bottom-4 border border-white/10 rounded-md bg-white/5 p-2 flex gap-4 items-center justify-start m-4">
+          <div className="absolute hidden lg:flex left-0 bottom-4 border border-white/10 rounded-md bg-white/5 p-2  gap-4 items-center justify-start m-4">
             {/* Shield Icon */}
             <div
               className="border rounded-full w-8 h-8 p-2 flex justify-center items-center"
@@ -86,12 +114,24 @@ export default function Home() {
       </div>
 
       {/* Feature Row */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 mt-20 pb-16 border-t border-slate-800 pt-10 grid grid-cols-2 md:grid-cols-4 gap-8 text-slate-400 text-sm">
-        <div>⚡ Ultra Fast</div>
-        <div>🔒 End-to-End</div>
-        <div>👥 Team Ready</div>
-        <div>☁ Cloud Sync</div>
-      </div>
+     <div className="relative z-10 max-w-7xl mx-auto px-6 mt-20 pb-16 border-t border-slate-800 pt-10
+                flex flex-wrap justify-between items-center gap-4 text-slate-400 text-xs md:text-sm">
+  {Feature.map((feature) => (
+    <div
+      key={feature.id}
+      className="flex items-center gap-2 flex-shrink-0"
+    >
+      <Image
+        src={feature.src}
+        alt={feature.desc}
+        width={16}   // smaller icon
+        height={16}
+        className="object-contain"
+      />
+      <span className="whitespace-nowrap">{feature.desc}</span>
+    </div>
+  ))}
+</div>
     </section>
   );
 }
